@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	  
+	  <script src="promise.js"></script>
+	  <script>
+	    function getUserId() {
+	      this.name = 'getUser'
+        return new Promise(function (resolve,reject) {
+            setTimeout(function() {
+              resolve(9876);
+            },1000);
+        });
+      }
+	    
+	    function getName() {
+        return new Promise(function (resolve,reject) {
+            setTimeout(function() {
+              resolve('aaa');
+              reject('这是一个错误');
+            },2000);
+        });
+      }
+	    
+	    getUserId().then(function(res) {
+	      console.log(this);
+	      console.log(res);
+	    })
+	    .then(function(res) {
+	      console.log(res);
+	      return getName();
+	    })
+	    .then(function(res) {
+	      console.log(res)
+	    })
+	    .catch(function(err) {
+	      console.log(err);
+	    });
+	  </script>
+	</body>
+</html>
